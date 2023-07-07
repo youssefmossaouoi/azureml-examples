@@ -1,0 +1,49 @@
+{
+  "package": {},
+  "code": {
+    "summarize_text_content_prompt.jinja2": {
+      "type": "prompt",
+      "inputs": {
+        "text": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "summarize_text_content_prompt.jinja2"
+    },
+    "echo_my_prompt.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "echo_my_prompt.py",
+      "function": "my_python_tool"
+    },
+    "llm_node_4r1e.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "url": {
+          "type": [
+            "string"
+          ]
+        },
+        "examples": {
+          "type": [
+            "string"
+          ]
+        },
+        "text_content": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "llm_node_4r1e.jinja2"
+    }
+  }
+}

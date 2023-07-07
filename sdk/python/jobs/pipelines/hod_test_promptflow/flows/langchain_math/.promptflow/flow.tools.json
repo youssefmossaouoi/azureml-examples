@@ -1,0 +1,40 @@
+{
+    "package": {},
+    "code": {
+        "call_llm_math.py": {
+            "type": "python",
+            "inputs": {
+                "question": {
+                    "type": [
+                        "string"
+                    ]
+                },
+                "conn": {
+                    "type": [
+                        "AzureOpenAIConnection"
+                    ]
+                }
+            },
+            "function": "call_llm_math"
+        },
+        "generate_examples.py": {
+            "type": "python",
+            "function": "gen_examples"
+        },
+        "generate_code.jinja2": {
+            "type": "llm",
+            "inputs": {
+                "examples": {
+                    "type": [
+                        "string"
+                    ]
+                },
+                "question": {
+                    "type": [
+                        "string"
+                    ]
+                }
+            }
+        }
+    }
+}

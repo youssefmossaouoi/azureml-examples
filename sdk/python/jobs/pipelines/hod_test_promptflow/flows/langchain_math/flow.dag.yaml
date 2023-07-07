@@ -1,0 +1,52 @@
+inputs:
+  question:
+    type: string
+outputs:
+  code:
+    type: string
+    reference: ${generate_code.output}
+  answer:
+    type: string
+    reference: ${call_llm_math.output.answer}
+nodes:
+- name: call_llm_math
+  type: python
+  source:
+    type: code
+    path: call_llm_math.py
+  inputs:
+    question: ${inputs.question}
+    conn: advanced_aoai_eastus
+- name: generate_examples
+  type: python
+  source:
+    type: code
+    path: generate_examples.py
+  inputs: {}
+- name: generate_code
+  type: llm
+  source:
+    type: code
+    path: generate_code.jinja2
+  inputs:
+    deployment_name: text-davinci-003
+    suffix: ''
+    max_tokens: '1024'
+    temperature: '1'
+    top_p: '1.0'
+    logprobs: ''
+    echo: 'False'
+    stop: ''
+    presence_penalty: '0'
+    frequency_penalty: '0'
+    best_of: '1'
+    logit_bias: ''
+    examples: ${generate_examples.output}
+    question: ${inputs.question}
+  provider: AzureOpenAI
+  connection: advanced_aoai_eastus
+  api: completion
+  module: promptflow.tools.aoai
+
+environment:
+  python_requirements_txt: requirements.txt

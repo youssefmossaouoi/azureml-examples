@@ -1,0 +1,23 @@
+inputs:
+  text:
+    type: string
+outputs:
+  output_prompt:
+    type: string
+    reference: ${echo_my_prompt.output}
+nodes:
+- inputs:
+    text: ${inputs.text}
+  name: summarize_text_content_prompt
+  type: prompt
+  source:
+    type: code
+    path: summarize_text_content_prompt.jinja2
+- inputs:
+    input1: ${summarize_text_content_prompt.output}
+  name: echo_my_prompt
+  type: python
+  source:
+    type: code
+    path: echo_my_prompt.py
+node_variants: {}
