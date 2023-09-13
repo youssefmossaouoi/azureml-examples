@@ -1,0 +1,82 @@
+{
+    "flowGraph": {
+        "nodes": [
+            {
+                "name": "hello_prompt",
+                "tool": "hello_prompt",
+                "inputs": {},
+                "reduce": false
+            },
+            {
+                "name": "echo_my_prompt",
+                "tool": "echo_my_prompt",
+                "inputs": {
+                    "input1": "${hello_prompt.output}"
+                },
+                "reduce": false
+            }
+        ],
+        "tools": [
+            {
+                "name": "hello_prompt",
+                "type": "prompt",
+                "inputs": {
+                    "question": {
+                        "name": "question",
+                        "type": [
+                            "string"
+                        ]
+                    }
+                },
+                "lkgCode": "{{question}}",
+                "code": "{{question}}",
+                "is_builtin": false
+            },
+            {
+                "name": "echo_my_prompt",
+                "type": "python",
+                "inputs": {
+                    "input1": {
+                        "type": [
+                            "string"
+                        ]
+                    }
+                },
+                "lkgCode": "from promptflow import tool\nimport time\nimport sys\n# The inputs section will change based on the arguments of the tool function, after you save the code\n# Adding type to arguments and return value will help the system show the types properly\n# Please update the function name/signature per need\n\n\n@tool\ndef my_python_tool(input1: str) -> str:\n    print(f\"@@@ My input data is {input1}...\")\n    sys.stderr.write(f\"### This is an error message {input1}\")  \n    return \"Prompt: \" + input1\n",
+                "code": "from promptflow import tool\nimport time\nimport sys\n# The inputs section will change based on the arguments of the tool function, after you save the code\n# Adding type to arguments and return value will help the system show the types properly\n# Please update the function name/signature per need\n\n\n@tool\ndef my_python_tool(input1: str) -> str:\n    print(f\"@@@ My input data is {input1}...\")\n    sys.stderr.write(f\"### This is an error message {input1}\")  \n    return \"Prompt: \" + input1\n",
+                "function": "my_python_tool",
+                "is_builtin": false
+            }
+        ],
+        "inputs": {
+            "question": {
+                "type": "string",
+                "is_chat_input": false
+            }
+        },
+        "outputs": {
+            "output_prompt": {
+                "type": "string",
+                "reference": "${echo_my_prompt.output}",
+                "evaluation_only": false,
+                "is_chat_output": false
+            }
+        }
+    },
+    "flowName": "Simple_mock_answer",
+    "flowRunResourceId": "azureml://locations/eastus/workspaces/3e123da1-f9a5-4c91-9234-8d9ffbb39ff5/flows/6f0d05fd-2cc1-495a-be6d-c60c3f3b1f14/flowRuns/47a86c90-16fe-4232-8426-bb82561c6bf4",
+    "flowRunDisplayName": "Simple_mock_answer-bulktest-variant_0-5e89fafc-b623-4be2-aaf5-808ef3ffeba4",
+    "batchDataInput": {
+        "dataUri": "azureml://locations/eastus/workspaces/3e123da1-f9a5-4c91-9234-8d9ffbb39ff5/data/hod_qa_simple/versions/1"
+    },
+    "flowRunType": "FlowRun",
+    "flowType": "Default",
+    "runtimeName": "demo-mir",
+    "bulkTestId": "5e89fafc-b623-4be2-aaf5-808ef3ffeba4",
+    "createdBy": {
+        "userObjectId": "c05e0746-e125-4cb3-9213-a8b535eacd79",
+        "userTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "userName": "Honglin Du"
+    },
+    "createdOn": "2023-06-29T06:20:10.6241669Z"
+}
